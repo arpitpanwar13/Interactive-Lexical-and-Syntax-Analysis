@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Lexical and Syntax Analysis Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Interactive Lexical and Syntax Analysis Tool</h1>
+
+    <div class="grid">
+      <!-- Left: Input Section -->
+      <div class="input-section">
+        <form id="codeForm">
+          <label for="language">Select Programming Language:</label>
+          <select id="language" name="language">
+            <option value="java">Java</option>
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+            <option value="python">Python</option>
+            <option value="javascript">JavaScript</option>
+            <option value="go">Go</option>
+          </select>
+
+          <label for="sourceCode">Enter your source code:</label>
+          <textarea id="sourceCode" name="sourceCode" placeholder="// Type your source code here..."></textarea>
+
+          <button type="submit">Validate & Generate Parse Tree</button>
+        </form>
+      </div>
+
+      <!-- Right: Tree Section -->
+      <div class="tree-section">
+        <h3>Parse Tree Visualization:</h3>
+        <div id="treeContainer" style="width: 800px; height: 600px; overflow: auto; border: 1px solid #ccc;">
+          <svg id="treeSvg"></svg>
+        </div>        
+      </div>
+    </div>
+  </div>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

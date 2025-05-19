@@ -1,0 +1,37 @@
+start: stmt+
+
+stmt: var_decl
+    | assign_stmt
+    | if_stmt
+    | while_stmt
+    | "return" expr ";"                     -> return_stmt
+    | "printf" "(" STRING ")" ";"           -> print_stmt
+
+var_decl: type NAME ";"                     -> declare
+assign_stmt: NAME "=" expr ";"              -> assign
+
+if_stmt: "if" "(" condition ")" "{" stmt+ "}" ("else" "{" stmt+ "}")? -> if_stmt
+while_stmt: "while" "(" condition ")" "{" stmt+ "}"                   -> while_stmt
+
+?expr: expr "+" term                        -> add
+     | expr "-" term                        -> sub
+     | term
+
+?term: term "*" factor                      -> mul
+     | term "/" factor                      -> div
+     | factor
+
+?factor: NUMBER                             -> number
+       | NAME                               -> var
+       | "(" expr ")"
+
+condition: expr comp_op expr                -> compare
+comp_op: "==" | "!=" | "<" | ">" | "<=" | ">="
+
+type: "int" | "float" | "char"
+
+%import common.CNAME -> NAME
+%import common.NUMBER
+%import common.ESCAPED_STRING -> STRING
+%import common.WS
+%ignore WS

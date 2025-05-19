@@ -1,0 +1,17 @@
+start: stmt+
+
+stmt: "print" STRING ";"             -> print_stmt
+    | NAME "=" expr ";"              -> assign_stmt
+
+expr: expr "+" term                  -> add
+    | term
+
+term: NUMBER                         -> number
+    | NAME                           -> var
+    | "(" expr ")"
+
+%import common.CNAME -> NAME
+%import common.NUMBER
+%import common.ESCAPED_STRING -> STRING
+%import common.WS
+%ignore WS
